@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
-import colorArray from './colorArray.js'
+import colorArray from './colorArray.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 let quotesDB = "https://gist.githubusercontent.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
@@ -33,18 +35,20 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" style={{backgroundColor:accentColor}}>
-        <div id="quote-box" style={{color:accentColor}}>
+      <header className="App-header" style={{ backgroundColor: accentColor }}>
+        <div id="quote-box" style={{ color: accentColor }}>
 
           <p id="text">
             "{quote}"
           </p>
           <div><p id="author" >- {author}</p></div>
-          <div><button id="new-quote"  style={{backgroundColor:accentColor}} onClick={() => getRandomQuote()}>Give me More!</button></div>
+          <div><button id="new-quote" style={{ backgroundColor: accentColor }} onClick={() => getRandomQuote()}>Give me More!
+          </button></div>
 
-          <a id="tweet-quote" href={encodeURI
+          <div className="button"><a style={{ backgroundColor: accentColor }} id="tweet-quote" href={encodeURI
             (`https://www.twitter.com/intent/tweet?text=${quote} 
             -${author}`)}>Tweet it!</a>
+          </div>
         </div>
 
       </header>
