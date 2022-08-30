@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
+import colorArray from './colorArray.js'
+
+let quotesDB = "https://gist.githubusercontent.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
 
 function App() {
+  const [quote, setQuote] = useState("Don't believe everything you read on the Internet")
+  const [author, setAuthor] = useState("Abraham Lincoln");
+  const [randomNumber, setRandomNumber] = useState(0)
+  const [quotesArray, setquotesArray] = useState(null)
+  const [accentColor, setAccentColor] = useState('#282c34')
+
+  const fetchQuotes = async (url) => {
+    const response = await fetch(url)
+    const parsedJSON = await response.json()
+    setquotesArray(parsedJSON.quotes)
+    console.log(parsedJSON)
+  }
+
+  useEffect(() => {
+    fetchQuotes(quotesDB)
+  }, [quotesDB])
+
+  const getRandomQuote = () => {
+    let randomInteger = Math.floor(quotesArray.length * Math.random())
+    setRandomNumber(randomInteger)
+    setAccentColor(colorArray[randomInteger])
+    setQuote(quotesArray[randomInteger].quote)
+    setAuthor(quotesArray[randomInteger].author)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header" style={{backgroundColor:accentColor}}>
+        <div id="quote-box" style={{color:accentColor}}>
+        
+          <p id="text">
+            "{quote}"
+          </p>
+          <div className="button">
+            <a id="tweet-quote" href={encodeURI(`https://www.twitter.com/intent/tweet?text=${quote}
+          -${author}`)}>Tweet it!</a></div>
+
+          <p id="author" >- {author}</p>
+        
+          <button id="new-quote" onClick={() => getRandomQuote()}>Give me More!</button>
+          
+        </div>
+
       </header>
-    </div>
+    </div >
   );
 }
 
