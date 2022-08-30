@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import colorArray from './colorArray.js'
 
+
 let quotesDB = "https://gist.githubusercontent.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
 
 function App() {
@@ -34,18 +35,16 @@ function App() {
     <div className="App">
       <header className="App-header" style={{backgroundColor:accentColor}}>
         <div id="quote-box" style={{color:accentColor}}>
-        
+
           <p id="text">
             "{quote}"
           </p>
-          <div className="button">
-            <a id="tweet-quote" href={encodeURI(`https://www.twitter.com/intent/tweet?text=${quote}
-          -${author}`)}>Tweet it!</a></div>
+          <div><p id="author" >- {author}</p></div>
+          <div><button id="new-quote"  style={{backgroundColor:accentColor}} onClick={() => getRandomQuote()}>Give me More!</button></div>
 
-          <p id="author" >- {author}</p>
-        
-          <button id="new-quote" onClick={() => getRandomQuote()}>Give me More!</button>
-          
+          <a id="tweet-quote" href={encodeURI
+            (`https://www.twitter.com/intent/tweet?text=${quote} 
+            -${author}`)}>Tweet it!</a>
         </div>
 
       </header>
