@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import colorArray from './colorArray.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+<FontAwesomeIcon icon="fa-brands fa-square-twitter" />
 
-
-let quotesDB = "https://gist.githubusercontent.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json"
+let quotesDB = "https://raw.githubusercontent.com/teffyeng/funny-quotes/main/quotesDB.json"
 
 function App() {
   const [quote, setQuote] = useState("Don't believe everything you read on the Internet")
   const [author, setAuthor] = useState("Abraham Lincoln");
-  const [randomNumber, setRandomNumber] = useState(0)
+  
   const [quotesArray, setquotesArray] = useState(null)
   const [accentColor, setAccentColor] = useState('#282c34')
 
@@ -22,11 +22,11 @@ function App() {
 
   useEffect(() => {
     fetchQuotes(quotesDB)
-  }, [quotesDB])
+  }, [])
 
   const getRandomQuote = () => {
     let randomInteger = Math.floor(quotesArray.length * Math.random())
-    setRandomNumber(randomInteger)
+  
     setAccentColor(colorArray[randomInteger])
     setQuote(quotesArray[randomInteger].quote)
     setAuthor(quotesArray[randomInteger].author)
